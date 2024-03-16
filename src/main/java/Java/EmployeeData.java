@@ -8,7 +8,7 @@ package Java;
  *
  * @author EM
  */
-public class EmployeeData {
+public class EmployeeData extends EmployeeModel {
     
     public Employee[] employees;
     
@@ -47,9 +47,10 @@ public class EmployeeData {
         employee2.setPhoneAllowance(800.00);
         employee2.setClothingAllowance(800.00);
 
-        employees = new Employee[]{employee1, employee2};
+        employees = new Employee[] { employee1, employee2 };
     }
 
+    @Override
     public Employee[] getEmployeeDataList() {
         return employees;
     }
