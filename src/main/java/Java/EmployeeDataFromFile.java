@@ -20,7 +20,7 @@ public class EmployeeDataFromFile extends EmployeeModel {
 //        EmployeeModelFromFile emp = new EmployeeModelFromFile();
 //    }
     public EmployeeDataFromFile() {
-        String textFile = "C:\\opt\\Java\\MotorPHEmployeeDataTextTile.txt";
+        String textFile = "C:\\opt\\Java\\MO-ITI01_Detera\\model\\MotorPHEmployeeDataTextTile.txt";
         employees = new Employee[34];
         getDataFromFile(textFile);
 

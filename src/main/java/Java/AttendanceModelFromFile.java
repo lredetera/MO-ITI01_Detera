@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 public class AttendanceModelFromFile extends AttendanceModel {
     public AttendanceModelFromFile() {
-        String textFile = "C:\\opt\\Java\\AttendanceTextTile.txt";
+        String textFile = "C:\\opt\\Java\\MO-ITI01_Detera\\model\\AttendanceTextTile.txt";
         attendances = new Attendance[2176];
         getatDataFromFile(textFile);
     }
