@@ -126,7 +126,7 @@ public class MotorPh {
             salary = (hourlyRate * sumHoursWorked)+rice+phoneAllow+clothing;
             Month selectMonth = Month.of(Integer.parseInt(month));
             String monthName = selectMonth.toString();
-            System.out.println("Month of " +monthName);
+            System.out.println("Pay Period: " +monthName);
             System.out.println("---------------------------------------------");
             System.out.println("ALLOWANCE" );
             System.out.println("Rice Subsidy: "+rice );
