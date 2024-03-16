@@ -135,17 +135,17 @@ public class MotorPh {
             System.out.println("---------------------------------------------");
             System.out.println("DEDUCTIONS" );
             System.out.println("Pag-ibig: "+salaryDeductions.getPagibigDeduc(salary) );
-            System.out.println("Philhealth: ");
+            System.out.println("Philhealth: "+salaryDeductions.getPhilHealthDeduc(salary));
             System.out.println("SSS: "+ salaryDeductions.getSSSdeduc(salary));
-            System.out.println("Withholding Tax: " );
+            System.out.println("Withholding Tax: "+ salaryDeductions.getTax(salary) );
             System.out.println("---------------------------------------------");
             System.out.println("EARNINGS" );
             System.out.println("Hourly Rate: "+hourlyRate );
             System.out.println("Hours worked: " +sumHoursWorked);
             System.out.println("Days Worked: "+ list.size());
-            System.out.println("Salary: " + (salary - salaryDeductions.getTotalDeductions(salary)));
+            System.out.println("Net Salary: " + (salary - salaryDeductions.getTotalDeductions(salary)));
             System.out.println("---------------------------------------------");
-            System.out.println("date: " + list);
+            System.out.println("Date: " + list);
             System.out.println("Time in: " + listTimeIn);
             System.out.println("Time out: " + listTimeOut);
         }
