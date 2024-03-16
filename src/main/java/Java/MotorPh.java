@@ -26,27 +26,27 @@ public class MotorPh {
 
         Employee[] employeeList = employeeModel.getEmployeeDataList();
         Attendance[] attendances = attendanceModel.getAttendanceModelList();
+        SalaryDeductions salaryDeductions = new SalaryDeductions();
 
         List<String> list=new ArrayList<String>();
         List<String> listTimeIn=new ArrayList<String>();
         List<String> listTimeOut=new ArrayList<String>();
         List<Double> hoursWorked=new ArrayList<Double>();
 
+        String id = "";
+        String name = "", bday = "", status = "", position = "", supervisor = "", sssNum = "",
+                philHealth = "", tin = "", pagIbig = "", basicSalary = "", rice = "", phoneAllow = "", clothing = "";
+        String month = "";
+        Double hourlyRate = 0.0;
+        Double sumHoursWorked = 0.0;
+        Double salary = 0.0;
+
         String junkDate = "";
-
-
 
         System.out.println("        **MOTORPH PAYROLL SYSTEM**     ");
         System.out.println("---------------------------------------------");
         String str = "";
         System.out.println("---------------------------------------------");
-        String id = "";
-        String name = "", bday = "", status= "",position= "",supervisor= "",sssNum= "",
-                philHealth= "",tin= "",pagIbig= "",basicSalary= "",rice= "",phoneAllow= "",clothing= "";
-        String date = "";
-        String month = "";
-        Double hourlyRate = 0.0;
-        Double sumHoursWorked = 0.0;
         //instantiation
         Scanner s = new Scanner(System.in);
 
@@ -119,12 +119,14 @@ public class MotorPh {
             for (Double i : hoursWorked)
                 sumHoursWorked += i;
 
+            salary = hourlyRate * sumHoursWorked;
+
             System.out.println("---------------------------------------------");
             System.out.println("EARNINGS" );
             System.out.println("Hourly Rate: "+hourlyRate );
             System.out.println("Hours worked: " +sumHoursWorked);
             System.out.println("Days Worked: "+ list.size());
-            System.out.println("Salary: "+ (hourlyRate * sumHoursWorked));
+            System.out.println("Salary: " + (salary - salaryDeductions.getTotalDeductions(salary)));
             System.out.println("---------------------------------------------");
             System.out.println("date: " + list);
             System.out.println("Time in: " + listTimeIn);
