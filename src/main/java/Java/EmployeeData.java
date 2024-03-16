@@ -12,7 +12,7 @@ public class EmployeeData {
     
     public Employee[] employees;
     
-    public EmployeeData() {
+    public EmployeeData()  {
         Employee employee1 = new Employee();
         employee1.setEmpId("7");
         employee1.setLastName("San Jose");
@@ -29,7 +29,7 @@ public class EmployeeData {
         employee1.setRiceSubsidy(1500.00);
         employee1.setPhoneAllowance(800.00);
         employee1.setClothingAllowance(800.00);
-        
+
         Employee employee2 = new Employee();
         employee2.setEmpId("8");
         employee2.setLastName("Romualdez");
@@ -46,10 +46,10 @@ public class EmployeeData {
         employee2.setRiceSubsidy(1500.00);
         employee2.setPhoneAllowance(800.00);
         employee2.setClothingAllowance(800.00);
-        
-        employees = new Employee[]{employee1, employee2};    
+
+        employees = new Employee[]{employee1, employee2};
     }
-    
+
     public Employee[] getEmployeeDataList() {
         return employees;
     }
