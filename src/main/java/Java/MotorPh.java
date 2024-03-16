@@ -43,6 +43,8 @@ public class MotorPh {
         Double salary = 0.0, rice =0.0,phoneAllow = 0.0,clothing = 0.0;
 
         String junkDate = "";
+        
+        DecimalFormat df = new DecimalFormat("#.##");
 
         System.out.println("        **MOTORPH PAYROLL SYSTEM**     ");
         System.out.println("---------------------------------------------");
@@ -129,23 +131,23 @@ public class MotorPh {
             System.out.println("Pay Period: " +monthName);
             System.out.println("---------------------------------------------");
             System.out.println("ALLOWANCE" );
-            System.out.println("Rice Subsidy: "+rice );
-            System.out.println("Phone Allowance: " +phoneAllow);
-            System.out.println("Clothing Allowance: "+ clothing);
+            System.out.println("Rice Subsidy: "+df.format(rice));
+            System.out.println("Phone Allowance: " +df.format(phoneAllow));
+            System.out.println("Clothing Allowance: "+ df.format(clothing));
             System.out.println("---------------------------------------------");
             System.out.println("DEDUCTIONS" );
-            System.out.println("Pag-ibig: "+salaryDeductions.getPagibigDeduc(salary) );
-            System.out.println("Philhealth: ");
-            System.out.println("SSS: "+ salaryDeductions.getSSSdeduc(salary));
-            System.out.println("Withholding Tax: " );
+            System.out.println("Pag-ibig: "+df.format(salaryDeductions.getPagibigDeduc(salary)) );
+            System.out.println("Philhealth: "+df.format(salaryDeductions.getPhilHealthDeduc(salary)));
+            System.out.println("SSS: "+ df.format(salaryDeductions.getSSSdeduc(salary)));
+            System.out.println("Withholding Tax: "+ df.format(salaryDeductions.getTax(salary)) );
             System.out.println("---------------------------------------------");
             System.out.println("EARNINGS" );
             System.out.println("Hourly Rate: "+hourlyRate );
-            System.out.println("Hours worked: " +sumHoursWorked);
+            System.out.println("Hours worked: " +df.format(sumHoursWorked));
             System.out.println("Days Worked: "+ list.size());
-            System.out.println("Salary: " + (salary - salaryDeductions.getTotalDeductions(salary)));
+            System.out.println("Net Salary: " + df.format((salary - salaryDeductions.getTotalDeductions(salary))));
             System.out.println("---------------------------------------------");
-            System.out.println("date: " + list);
+            System.out.println("Date: " + list);
             System.out.println("Time in: " + listTimeIn);
             System.out.println("Time out: " + listTimeOut);
         }

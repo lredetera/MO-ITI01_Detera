@@ -54,7 +54,7 @@ public class SalaryDeductions {
     
     }
 
-    //NOTE: To get like getPagibigDeduction we need to create public instance method like below example
+    //NOTE: To get getPagibigDeduction we need to create public instance method like below example
     //this method have a parameter called salary
     public double getPagibigDeduc(double salary) {
         final double minimunCompensation = 1500;
@@ -70,5 +70,23 @@ public class SalaryDeductions {
             return salary * 0.045;
         }
         return constant * 0.045;
+    }
+    public double getPhilHealthDeduc(double salary) {
+        return salary * 0.05;
+    }
+    public double getTax(double salary) {
+        double withHoldingTax = 0;
+        if (salary > 20833 && salary <= 33333) {
+            withHoldingTax = (salary - 20833) * 0.15;
+        } else if (salary >= 33333 && salary <= 66667) {
+            withHoldingTax = 1875 + (salary - 33333) * 0.2;
+        } else if (salary >= 66667 && salary <= 166667) {
+            withHoldingTax = 8541 + (salary - 66667) * 0.25;
+        } else if (salary >= 166667 && salary <= 666667) {
+            withHoldingTax = 33541 + (salary - 166667) * 0.3;
+        } else if (salary > 666667) {
+            withHoldingTax = 183541 + (salary - 666667) * 0.35;
+        }
+        return withHoldingTax;
     }
 }
