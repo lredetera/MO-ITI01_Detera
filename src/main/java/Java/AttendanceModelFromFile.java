@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 public class AttendanceModelFromFile extends AttendanceModel {
     public AttendanceModelFromFile() {
         String textFile = "C:\\opt\\Java\\AttendanceTextTile.txt";
-        attendances = new Attendance[30];
+        attendances = new Attendance[2176];
         getatDataFromFile(textFile);
     }
 

@@ -19,9 +19,9 @@ public class MotorPh {
 
     public static void main(String[] args) {
 //    employeeModel = new EmployeeData();
-//        employeeModel = new EmployeeDataFromFile();
+//        attendanceModel = new AttendanceData();
 
-        attendanceModel = new AttendanceData();
+        attendanceModel = new AttendanceModelFromFile();
         employeeModel = new EmployeeDataFromFile();
 
         Employee[] employeeList = employeeModel.getEmployeeDataList();
@@ -30,7 +30,10 @@ public class MotorPh {
         List<String> list=new ArrayList<String>();
         List<String> listTimeIn=new ArrayList<String>();
         List<String> listTimeOut=new ArrayList<String>();
+        List<Double> hoursWorked=new ArrayList<Double>();
+
         String junkDate = "";
+
 
 
         System.out.println("        **MOTORPH PAYROLL SYSTEM**     ");
@@ -42,7 +45,8 @@ public class MotorPh {
                 philHealth= "",tin= "",pagIbig= "",basicSalary= "",rice= "",phoneAllow= "",clothing= "";
         String date = "";
         String month = "";
-
+        Double hourlyRate = 0.0;
+        Double sumHoursWorked = 0.0;
         //instantiation
         Scanner s = new Scanner(System.in);
 
@@ -59,6 +63,7 @@ public class MotorPh {
                 tin = obj.getTin();
                 philHealth = obj.getPhilhealth();
                 pagIbig = obj.getPagIbig();
+                hourlyRate = obj.getHourlyRate();
                 break;
             }
             id = "";
@@ -79,96 +84,51 @@ public class MotorPh {
             System.out.println("Philhealth: " + philHealth);
             System.out.println("Pag-ibig: " + pagIbig);
             System.out.println("---------------------------------------------");
+            System.out.print("Enter Employee Number: "+ attendances[2].getDate());
 
             Scanner s2 = new Scanner(System.in);
             System.out.print("Payroll Month(1-12):");
             month = s2.nextLine();
 
             for (Attendance obj : attendances) {
-                if (Objects.equals(id, obj.getEmployeeID())){
-                    if (Objects.equals(month.length(), 1)){
-                        junkDate = obj.getDate().substring(1,2);
-                    }else{
-                        junkDate = obj.getDate().substring(0,2);
-                    }
+                if (obj != null){
+                    if (Objects.equals(id, obj.getEmployeeID())){
+                        if (Objects.equals(month.length(), 1)){
+                            junkDate = obj.getDate().substring(1,2);
+                        }else{
+                            junkDate = obj.getDate().substring(0,2);
+                        }
 
-                    if (Objects.equals(month, junkDate)){
-                        list.add(obj.getDate());
-                        listTimeIn.add(obj.getTimeIn());
-                        listTimeOut.add(obj.getTimeOut());
-                    }
+                        if (Objects.equals(month, junkDate)){
+                            list.add(obj.getDate());
+                            listTimeIn.add(obj.getTimeIn());
+                            listTimeOut.add(obj.getTimeOut());
+                        }
 //                    list.add(obj.getDate()
+                    }
                 }
             }
+
+            for (int i = 0; i < listTimeIn.size(); i++) {
+                String timein = listTimeIn.get(i).replace(":",".");
+                String timeout = listTimeOut.get(i).replace(":",".");
+
+                double sum =   (Double.parseDouble(timeout)-Double.parseDouble(timein)-1);
+                hoursWorked.add(sum);
+            }
+            for (Double i : hoursWorked)
+                sumHoursWorked += i;
+
+            System.out.println("---------------------------------------------");
+            System.out.println("EARNINGS" );
+            System.out.println("Hourly Rate: "+hourlyRate );
+            System.out.println("Hours worked: " +sumHoursWorked);
+            System.out.println("Days Worked: "+ list.size());
+            System.out.println("Salary: "+ (hourlyRate * sumHoursWorked));
+            System.out.println("---------------------------------------------");
             System.out.println("date: " + list);
             System.out.println("Time in: " + listTimeIn);
             System.out.println("Time out: " + listTimeOut);
-
         }
-
-//        for (int i = 0; i < employeeList.length; i++) {
-//            employee = employeeList[i];
-//            if (Objects.equals(str, employee.getEmpId())) {
-//                System.out.println("Employee ID: " + employee.getEmpId());
-//                System.out.println("Full Name: " + employee.getLastName() + " " +
-//                        employee.getFirstName());
-//                System.out.println("Birthday: " + employee.getBirthDay());
-//                System.out.println("Employment Status: " + employee.getStatus());
-//                System.out.println("---------------------------------------------");
-//
-//                System.out.println("SSS: " + employee.getSssNum());
-//                System.out.println("TIN: " + employee.getTinNum());
-//                System.out.println("Philhealth: " + employee.getPhilHealthNum());
-//                System.out.println("Pag-ibig: " + employee.getPagibigNum());
-//                System.out.println("---------------------------------------------");
-//
-//                // Scanner s2 = new Scanner(System.in);
-//                 Scanner s3 = new Scanner(System.in);
-//
-//
-//                         System.out.print("Payroll Month(1-12):");
-//                         x = s2.nextInt();
-//                         System.out.print("March 2022");
-
-//                        // get time int and time out
-//                        // deduct time out and time in and 1 hour lunch break
-//                        // loop in dates and add the hours worked
-//                        // this is hours worked
-//
-//
-//                        // System.out.println("---------------------------------------------");
-//                        // System.out.println("EARNINGS" );
-//                        // System.out.println("Hourly Rate: 200" );
-//                        // System.out.println("Hours worked: 25.8" );
-//                        // System.out.println("Days Worked: 20");
-//                        // System.out.println("Overtime: 120" );
-//                        // System.out.println("---------------------------------------------");
-//                        // System.out.println("ALLOWANCE" );
-//                        // System.out.println("Hourly Rate: 200" );
-//                        // System.out.println("Hours worked: 25.8" );
-//                        // System.out.println("Days Worked: 20");
-//                        // System.out.println("Overtime: 120" );
-//                        // System.out.println("---------------------------------------------");
-//                        // System.out.println("DEDUCTIONS" );
-//                        // System.out.println("Hourly Rate: 200" );
-//                        // System.out.println("Hours worked: 25.8" );
-//                        // System.out.println("Days Worked: 20");
-//                        // System.out.println("TOTAL" );
-//                        // System.out.println("---------------------------------------------");
-//                        // System.out.println("SUMMARY" );
-//                        // System.out.println("GROSS INCOME:" );
-//                        // System.out.println("TOTAL BENEFITS" );
-//                        // System.out.println("TOTAL DEDUCTIONS");
-//                        // System.out.println("TAKE HOME PAY" );
-//                        // System.out.println("---------------------------------------------");
-//                        //
-//
-//                        break;
-//                    } else {
-//                        System.out.println("No data found");
-////                                break;
-//                    }
-//
-//        }
     }
 }
