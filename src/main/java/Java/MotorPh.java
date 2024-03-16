@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
+import java.text.DecimalFormat;
 /**
  *
  * @author EM
@@ -87,7 +88,7 @@ public class MotorPh {
             System.out.println("Philhealth: " + philHealth);
             System.out.println("Pag-ibig: " + pagIbig);
             System.out.println("---------------------------------------------");
-            System.out.print("Enter Employee Number: "+ attendances[2].getDate());
+//            System.out.print("Enter Employee Number: "+ attendances[2].getDate());
 
             Scanner s2 = new Scanner(System.in);
             System.out.print("Payroll Month(1-12):");
@@ -122,7 +123,7 @@ public class MotorPh {
             for (Double i : hoursWorked)
                 sumHoursWorked += i;
 
-            salary = hourlyRate * sumHoursWorked;
+            salary = (hourlyRate * sumHoursWorked)+rice+phoneAllow+clothing;
             Month selectMonth = Month.of(Integer.parseInt(month));
             String monthName = selectMonth.toString();
             System.out.println("Month of " +monthName);
@@ -131,6 +132,12 @@ public class MotorPh {
             System.out.println("Rice Subsidy: "+rice );
             System.out.println("Phone Allowance: " +phoneAllow);
             System.out.println("Clothing Allowance: "+ clothing);
+            System.out.println("---------------------------------------------");
+            System.out.println("DEDUCTIONS" );
+            System.out.println("Pag-ibig: "+salaryDeductions.getPagibigDeduc(salary) );
+            System.out.println("Philhealth: ");
+            System.out.println("SSS: "+ salaryDeductions.getSSSdeduc(salary));
+            System.out.println("Withholding Tax: " );
             System.out.println("---------------------------------------------");
             System.out.println("EARNINGS" );
             System.out.println("Hourly Rate: "+hourlyRate );
