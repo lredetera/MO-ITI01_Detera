@@ -3,7 +3,7 @@
  */
 
 package Java;
-
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -35,11 +35,11 @@ public class MotorPh {
 
         String id = "";
         String name = "", bday = "", status = "", position = "", supervisor = "", sssNum = "",
-                philHealth = "", tin = "", pagIbig = "", basicSalary = "", rice = "", phoneAllow = "", clothing = "";
+                philHealth = "", tin = "", pagIbig = "", basicSalary = "";
         String month = "";
         Double hourlyRate = 0.0;
         Double sumHoursWorked = 0.0;
-        Double salary = 0.0;
+        Double salary = 0.0, rice =0.0,phoneAllow = 0.0,clothing = 0.0;
 
         String junkDate = "";
 
@@ -64,6 +64,9 @@ public class MotorPh {
                 philHealth = obj.getPhilhealth();
                 pagIbig = obj.getPagIbig();
                 hourlyRate = obj.getHourlyRate();
+                rice = obj.getRiceSubsidy();
+                phoneAllow = obj.getPhoneAllowance();
+                clothing = obj.getClothingAllowance();
                 break;
             }
             id = "";
@@ -120,7 +123,14 @@ public class MotorPh {
                 sumHoursWorked += i;
 
             salary = hourlyRate * sumHoursWorked;
-
+            Month selectMonth = Month.of(Integer.parseInt(month));
+            String monthName = selectMonth.toString();
+            System.out.println("Month of " +monthName);
+            System.out.println("---------------------------------------------");
+            System.out.println("ALLOWANCE" );
+            System.out.println("Rice Subsidy: "+rice );
+            System.out.println("Phone Allowance: " +phoneAllow);
+            System.out.println("Clothing Allowance: "+ clothing);
             System.out.println("---------------------------------------------");
             System.out.println("EARNINGS" );
             System.out.println("Hourly Rate: "+hourlyRate );
