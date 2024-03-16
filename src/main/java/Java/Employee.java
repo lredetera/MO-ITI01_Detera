@@ -9,141 +9,80 @@ package Java;
  * @author EM
  */
 public class Employee {
-    
-    private String empId;
+    private String empID;
     private String lastName;
     private String firstName;
-    private String birthDay;
+    private String birthday;
+    private String address;
+    private String phoneNumber;
+    private String sss;
+    private String philhealth;
+    private String tin;
+    private String pagIbig;
     private String status;
     private String position;
-    private String supervisor;
-    private String sssNum;
-    private String philHealthNum;
-    private String tinNum;
-    private String pagibigNum;
-    private double basicSalary;
-    private double riceSubsidy;
-    private double phoneAllowance;
-    private double clothingAllowance;
-    
-    public String getEmpId() {
-        return empId;
-    }
-    
-    public void setEmpId(String empId) {
-        this.empId = empId;
-    }
-    public String getLastName() {
-        return lastName;
-    }
-    
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-    
-    public String getFirstName() {
-        return firstName;
-    }
-    
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-    
-    public String getBirthDay() {
-        return birthDay;
-    }
-    
-    public void setBirthDay(String birthDay) {
-        this.birthDay = birthDay;
-    }
-    
-    public String getStatus() {
-        return status;
-    }
-    
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    
-    public String getPosition() {
-        return position;
-    }
-    
-    public void setPosition(String position) {
-        this.position = position;
-    }
-    
-    public String getSupervisor() {
-        return supervisor;
-    }
-    
-    public void setSupervisor(String supervisor) {
-        this.supervisor = supervisor;
-    }
-    
-    public String getSssNum() {
-        return sssNum;
-    }
-    
-    public void setSssNum(String sssNum) {
-        this.sssNum = sssNum;
-    }
-    
-    public String getPhilHealthNum() {
-        return philHealthNum;
-    }
-    
-    public void setPhilHealthNum(String philHealthNum) {
-        this.philHealthNum = philHealthNum;
-    }
-    
-    public String getTinNum() {
-        return tinNum;
-    }
-    
-    public void setTinNum(String tinNum) {
-        this.tinNum = tinNum;
-    }
-    
-    public String getPagibigNum() {
-        return pagibigNum;
-    }
-    
-    public void setPagibigNum(String pagibigNum) {
-        this.pagibigNum = pagibigNum;
-    }
-    
-    public Double getBasicSalary() {
-        return basicSalary;
-    }
-    
-    public void setBasicSalary(double basicSalary) {
-        this.basicSalary = basicSalary;
-    }
-    
-    public Double getRiceSubsidy() {
-        return riceSubsidy;
-    }
-    
-    public void setRiceSubsidy(double riceSubsidy) {
-        this.riceSubsidy = riceSubsidy;
-    }
-    
-    public Double getPhoneAllowance() {
-        return phoneAllowance;
-    }
-    
-    public void setPhoneAllowance(double phoneAllowance) {
-        this.phoneAllowance = phoneAllowance;
-    }
-   
-    public Double getClothingAllowance() {
-        return clothingAllowance;
-    }
-    
-    public void setClothingAllowance(double clothingAllowance) {
-        this.clothingAllowance = clothingAllowance;
-    }
+    private String immediateSupervisor;
+    private Double basicSalary;
+    private Double riceSubsidy;
+    private Double phoneAllowance;
+    private Double clothingAllowance;
+    private Double grossSemiMonthlyRate;
+    private Double hourlyRate;
+
+    public String getEmpID() { return empID; }
+    public void setEmpID(String value) { this.empID = value; }
+
+    public String getLastName() { return lastName; }
+    public void setLastName(String value) { this.lastName = value; }
+
+    public String getFirstName() { return firstName; }
+    public void setFirstName(String value) { this.firstName = value; }
+
+    public String getBirthday() { return birthday; }
+    public void setBirthday(String value) { this.birthday = value; }
+
+    public String getAddress() { return address; }
+    public void setAddress(String value) { this.address = value; }
+
+    public String getPhoneNumber() { return phoneNumber; }
+    public void setPhoneNumber(String value) { this.phoneNumber = value; }
+
+    public String getSss() { return sss; }
+    public void setSss(String value) { this.sss = value; }
+
+    public String getPhilhealth() { return philhealth; }
+    public void setPhilhealth(String value) { this.philhealth = value; }
+
+    public String getTin() { return tin; }
+    public void setTin(String value) { this.tin = value; }
+
+    public String getPagIbig() { return pagIbig; }
+    public void setPagIbig(String value) { this.pagIbig = value; }
+
+    public String getStatus() { return status; }
+    public void setStatus(String value) { this.status = value; }
+
+    public String getPosition() { return position; }
+    public void setPosition(String value) { this.position = value; }
+
+    public String getImmediateSupervisor() { return immediateSupervisor; }
+    public void setImmediateSupervisor(String value) { this.immediateSupervisor = value; }
+
+    public Double getBasicSalary() { return basicSalary; }
+    public void setBasicSalary(double value) { this.basicSalary = value; }
+
+    public Double getRiceSubsidy() { return riceSubsidy; }
+    public void setRiceSubsidy(double value) { this.riceSubsidy = value; }
+
+    public Double getPhoneAllowance() { return phoneAllowance; }
+    public void setPhoneAllowance(double value) { this.phoneAllowance = value; }
+
+    public Double getClothingAllowance() { return clothingAllowance; }
+    public void setClothingAllowance(double value) { this.clothingAllowance = value; }
+
+    public Double getGrossSemiMonthlyRate() { return grossSemiMonthlyRate; }
+    public void setGrossSemiMonthlyRate(double value) { this.grossSemiMonthlyRate = value; }
+
+    public Double getHourlyRate() { return hourlyRate; }
+    public void setHourlyRate(double value) { this.hourlyRate = value; }
 }
-    
-    
