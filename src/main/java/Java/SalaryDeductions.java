@@ -53,4 +53,22 @@ public class SalaryDeductions {
         return getSSSdeduction() + getPagibigDeduction() + getPhilHealthDeduction() + getWithholdingTax();
     
     }
+
+    //NOTE: To get like getPagibigDeduction we need to create public instance method like below example
+    //this method have a parameter called salary
+    public double getPagibigDeduc(double salary) {
+        final double minimunCompensation = 1500;
+        if (salary > minimunCompensation) {
+            return salary * 0.02;
+        }
+        return salary * 0.01;
+    }
+
+    public double getSSSdeduc(double salary) {
+        final int constant = 25000;
+        if ((int) Math.round(salary) < constant) {
+            return salary * 0.045;
+        }
+        return constant * 0.045;
+    }
 }
