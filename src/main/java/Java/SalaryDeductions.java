@@ -55,7 +55,7 @@ public class SalaryDeductions {
     }
 
     //NOTE: To get getPagibigDeduction we need to create public instance method like below example
-    //this method have a parameter called salary
+    //this method has a parameter called salary
     public double getPagibigDeduc(double salary) {
         final double minimunCompensation = 1500;
         if (salary > minimunCompensation) {
