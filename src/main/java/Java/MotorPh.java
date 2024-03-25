@@ -17,15 +17,99 @@ public class MotorPh {
     // Declare variables to hold employee and attendance data
     private static EmployeeModel employeeModel;
     private static AttendanceModel attendanceModel;
+    private static int platform = 1;
 
 
     public static void main(String[] args) {
         // Initialize employee and attendance models
-        attendanceModel = new AttendanceModelFromFile();
-        employeeModel = new EmployeeDataFromFile();
-        // Call method to choose an employee
-        chooseEmployee();
+        getDefaultModel();
+        displayMainMenu();
     }
+
+    private static void displayMainMenu() {
+        System.out.println("***********************************************");
+        System.out.println("        Motor PH Main Menu      ");
+        System.out.println("***********************************************");
+        System.out.println("1: Data to read from     ");
+        System.out.println("2: Choose Employee Records     ");
+        System.out.println("************************************************");
+        /**
+         * Creates an object of Scanner Resource from Camu:
+         * https://www.programiz.com/java-programming/scanner
+         */
+        Scanner input = new Scanner(System.in);
+        System.out.print("Pleas choose the screen you would like to view: ");
+        // takes input from the keyboard
+        String option = input.nextLine();
+        // prints the option
+        processOption(option);
+        // closes the scanner
+        input.close();
+    }
+
+    private static void processOption(String option) {
+        // Used conditional branch "switch" statement
+        switch (option) {
+            case "1":
+                choosePlatform();
+                break;
+            case "2":
+                chooseEmployee();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private static void getDefaultModel() {
+        if (platform == 1) {
+            attendanceModel = new AttendanceModelFromFile();
+            employeeModel = new EmployeeDataFromFile();
+        } else {
+            employeeModel = new EmployeeData();
+            attendanceModel = new AttendanceData();
+        }
+    }
+
+    private static void choosePlatform() {
+        System.out.println("**********************************************************");
+        System.out.println("    You have chosen option #1");
+        System.out.println("    Which platform you would like the data to be read?   ");
+        System.out.println("    Option 1: Text File   ");
+        System.out.println("    Option 2: Class File  ");
+        System.out.println("**********************************************************");
+        Scanner inputPlatform = new Scanner(System.in);
+        String optionPlatform = inputPlatform.nextLine();
+        switch (optionPlatform) {
+            case "1":
+                platform = 1;
+                break;
+            case "2":
+                platform = 2;
+                break;
+            default:
+                break;
+        }
+
+        System.out.println("**********************************************************");
+        System.out.println("    You have chosen option: " + optionPlatform);
+        System.out.println("    Would you like to go back to main menu?   ");
+        System.out.println("    Option 1: Yes   ");
+        System.out.println("    Option 2: No  ");
+        System.out.println("**********************************************************");
+        Scanner inputToMainMenu = new Scanner(System.in);
+        String optionToMainMenu = inputToMainMenu.nextLine();
+        switch (optionToMainMenu) {
+            case "1":
+                displayMainMenu();
+                break;
+            default:
+                break;
+        }
+        inputToMainMenu.close();
+        inputPlatform.close();
+    }
+
 
     /**
      * The chooseEmployee method allows the user to input an employee ID and
@@ -37,8 +121,8 @@ public class MotorPh {
         // Retrieve the list of employees
         Employee[] employeeList = employeeModel.getEmployeeDataList();
 
-        String id = "";
-        String name = "", bday = "", status = "", sssNum = "",
+        String employeeID = "";
+        String fullName = "", birthday = "", employmentStatus = "", sssNumber = "",
                 philHealth = "", tin = "", pagIbig = "";
         String setEmpId = "";
 
@@ -46,46 +130,46 @@ public class MotorPh {
         System.out.println("        **MOTORPH PAYROLL SYSTEM**     ");
         System.out.println("---------------------------------------------");
         //instantiation
-        Scanner s1 = new Scanner(System.in);
+        Scanner inputEmployeeID = new Scanner(System.in);
 
-        System.out.print("Enter Employee Number: ");
-        setEmpId = s1.nextLine();
+        System.out.print("Enter Employee ID: ");
+        setEmpId = inputEmployeeID.nextLine();
 
         // Iterate through the list of employees to find the specified employee
         for (Employee employee : employeeList) {
             if (Objects.equals(employee.getEmpID(), setEmpId)) {
                 // Retrieve employee details
-                id = employee.getEmpID();
-                name = employee.getFirstName() + " " + employee.getLastName();
-                bday = employee.getBirthday();
-                status = employee.getStatus();
-                sssNum = employee.getSss();
+                employeeID = employee.getEmpID();
+                fullName = employee.getFirstName() + " " + employee.getLastName();
+                birthday = employee.getBirthday();
+                employmentStatus = employee.getStatus();
+                sssNumber = employee.getSss();
                 tin = employee.getTin();
                 philHealth = employee.getPhilhealth();
                 pagIbig = employee.getPagIbig();
                 break;
             }
-            id = "";
+            employeeID = "";
         }
 
         // Display employee details if found, otherwise display "No data found"
-        if (Objects.equals(id, "")){
+        if (Objects.equals(employeeID, "")) {
             System.out.println("No data found");
         } else {
-            System.out.println("Employee ID: " + id);
-            System.out.println("Full Name:"+ name);
-            System.out.println("Birthday: " + bday);
-            System.out.println("Employment Status: " + status);
+            System.out.println("Employee ID: " + employeeID);
+            System.out.println("Full Name:" + fullName);
+            System.out.println("Birthday: " + birthday);
+            System.out.println("Employment Status: " + employmentStatus);
             System.out.println("---------------------------------------------");
-            System.out.println("SSS: " + sssNum);
+            System.out.println("SSS: " + sssNumber);
             System.out.println("TIN: " + tin);
             System.out.println("Philhealth: " + philHealth);
             System.out.println("Pag-ibig: " + pagIbig);
             System.out.println("---------------------------------------------");
 
             // Call method to calculate net salary for the employee
-            employeeNetSalary(id);
-            s1.close();
+            employeeNetSalary(employeeID);
+            inputEmployeeID.close();
         }
 
     }
@@ -106,11 +190,11 @@ public class MotorPh {
         List<Double> listHoursWork = new ArrayList<Double>();
         Double hourlyRate = 0.0;
         Double totalHoursWork = 0.0;
-        Double salary = 0.0, rice = 0.0, phoneAllow = 0.0, clothing = 0.0;
+        Double salary = 0.0, riceAllowance = 0.0, phoneAllowance = 0.0, clothingAllowance = 0.0;
 
-        String month = "";
+        String selectedPayrollMonth = "";
 
-        String stringDate = "";
+        String payrollMonth = "";
 
         DecimalFormat df = new DecimalFormat("#.##");
 
@@ -119,30 +203,30 @@ public class MotorPh {
         for (Employee employee : employeeList) {
             if (Objects.equals(employee.getEmpID(), employeeId)) {
                 hourlyRate = employee.getHourlyRate();
-                rice = employee.getRiceSubsidy();
-                phoneAllow = employee.getPhoneAllowance();
-                clothing = employee.getClothingAllowance();
+                riceAllowance = employee.getRiceSubsidy();
+                phoneAllowance = employee.getPhoneAllowance();
+                clothingAllowance = employee.getClothingAllowance();
                 break;
             }
         }
 
-        Scanner s2 = new Scanner(System.in);
+        Scanner inputPayrollMonth = new Scanner(System.in);
 
-        System.out.print("Payroll Month(1-12):");
-        month = s2.nextLine();
+        System.out.print("Enter Payroll Month(1-12):");
+        selectedPayrollMonth = inputPayrollMonth.nextLine();
         System.out.println("Pay Period: " + employeeId);
 
         // Iterate through the list of attendances to find data for the specified month
         for (Attendance attendance : attendances) {
             if (attendance != null) {
                 if (Objects.equals(employeeId, attendance.getEmployeeID())) {
-                    if (Objects.equals(month.length(), 1)) {
-                        stringDate = attendance.getDate().substring(1, 2);
+                    if (Objects.equals(selectedPayrollMonth.length(), 1)) {
+                        payrollMonth = attendance.getDate().substring(1, 2);
                     } else {
-                        stringDate = attendance.getDate().substring(0, 2);
+                        payrollMonth = attendance.getDate().substring(0, 2);
                     }
 
-                    if (Objects.equals(month, stringDate)) {
+                    if (Objects.equals(selectedPayrollMonth, payrollMonth)) {
                         listDaysWork.add(attendance.getDate());
                         listTimeIn.add(attendance.getTimeIn());
                         listTimeOut.add(attendance.getTimeOut());
@@ -165,19 +249,19 @@ public class MotorPh {
             totalHoursWork += i;
 
         // Calculate basic salary
-        double allowance = rice + phoneAllow + clothing;
+        double allowance = riceAllowance + phoneAllowance + clothingAllowance;
         salary = computeSalary(totalHoursWork, allowance, hourlyRate);
 
         // Convert month number to month name
-        Month selectedMonth = Month.of(Integer.parseInt(month));
+        Month selectedMonth = Month.of(Integer.parseInt(selectedPayrollMonth));
         String monthName = selectedMonth.toString();
 
         System.out.println("Pay Period: " + monthName);
         System.out.println("---------------------------------------------");
         System.out.println("ALLOWANCE");
-        System.out.println("Rice Subsidy: " + df.format(rice));
-        System.out.println("Phone Allowance: " + df.format(phoneAllow));
-        System.out.println("Clothing Allowance: " + df.format(clothing));
+        System.out.println("Rice Subsidy: " + df.format(riceAllowance));
+        System.out.println("Phone Allowance: " + df.format(phoneAllowance));
+        System.out.println("Clothing Allowance: " + df.format(clothingAllowance));
         System.out.println("---------------------------------------------");
         System.out.println("DEDUCTIONS");
         System.out.println("Pag-ibig: " + df.format(salaryDeductions.getPagibigDeduc(salary)));
@@ -195,7 +279,7 @@ public class MotorPh {
         System.out.println("Time in: " + listTimeIn);
         System.out.println("Time out: " + listTimeOut);
 
-        s2.close();
+        inputPayrollMonth.close();
     }
 
     /**
