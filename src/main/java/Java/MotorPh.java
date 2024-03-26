@@ -17,12 +17,13 @@ public class MotorPh {
     // Declare variables to hold employee and attendance data
     private static EmployeeModel employeeModel;
     private static AttendanceModel attendanceModel;
-    private static int platform = 1;
+    private static String selectedEmployeeId = "1";
 
 
     public static void main(String[] args) {
         // Initialize employee and attendance models
-        getDefaultModel();
+        attendanceModel = new AttendanceModelFromFile();
+        employeeModel = new EmployeeDataFromFile();
         displayMainMenu();
     }
 
@@ -30,8 +31,9 @@ public class MotorPh {
         System.out.println("***********************************************");
         System.out.println("        Motor PH Main Menu      ");
         System.out.println("***********************************************");
-        System.out.println("1: Data to read from     ");
-        System.out.println("2: Choose Employee Records     ");
+        System.out.println("1: View Employee Records     ");
+        System.out.println("2: Calculate Net Salary Based on Hours Worked    ");
+        System.out.println("3: Calculate Net Salary    ");
         System.out.println("************************************************");
         /**
          * Creates an object of Scanner Resource from Camu:
@@ -51,48 +53,21 @@ public class MotorPh {
         // Used conditional branch "switch" statement
         switch (option) {
             case "1":
-                choosePlatform();
-                break;
-            case "2":
                 chooseEmployee();
                 break;
-            default:
-                break;
-        }
-    }
-
-    private static void getDefaultModel() {
-        if (platform == 1) {
-            attendanceModel = new AttendanceModelFromFile();
-            employeeModel = new EmployeeDataFromFile();
-        } else {
-            employeeModel = new EmployeeData();
-            attendanceModel = new AttendanceData();
-        }
-    }
-
-    private static void choosePlatform() {
-        System.out.println("**********************************************************");
-        System.out.println("    You have chosen option #1");
-        System.out.println("    Which platform you would like the data to be read?   ");
-        System.out.println("    Option 1: Text File   ");
-        System.out.println("    Option 2: Class File  ");
-        System.out.println("**********************************************************");
-        Scanner inputPlatform = new Scanner(System.in);
-        String optionPlatform = inputPlatform.nextLine();
-        switch (optionPlatform) {
-            case "1":
-                platform = 1;
-                break;
             case "2":
-                platform = 2;
+                employeeNetSalary(selectedEmployeeId);
+                break;
+            case "3":
+                calculateNetSalary();
                 break;
             default:
                 break;
         }
+    }
 
+    private static void goBackToMainMenu() {
         System.out.println("**********************************************************");
-        System.out.println("    You have chosen option: " + optionPlatform);
         System.out.println("    Would you like to go back to main menu?   ");
         System.out.println("    Option 1: Yes   ");
         System.out.println("    Option 2: No  ");
@@ -107,7 +82,6 @@ public class MotorPh {
                 break;
         }
         inputToMainMenu.close();
-        inputPlatform.close();
     }
 
 
@@ -126,9 +100,11 @@ public class MotorPh {
                 philHealth = "", tin = "", pagIbig = "";
         String setEmpId = "";
 
-
+        System.out.println("***********************************************");
         System.out.println("        **MOTORPH PAYROLL SYSTEM**     ");
-        System.out.println("---------------------------------------------");
+        System.out.println("        You have chosen option #1    ");
+        System.out.println("          View Employee Records      ");
+        System.out.println("***********************************************");
         //instantiation
         Scanner inputEmployeeID = new Scanner(System.in);
 
@@ -156,6 +132,7 @@ public class MotorPh {
         if (Objects.equals(employeeID, "")) {
             System.out.println("No data found");
         } else {
+            selectedEmployeeId = employeeID;
             System.out.println("Employee ID: " + employeeID);
             System.out.println("Full Name:" + fullName);
             System.out.println("Birthday: " + birthday);
@@ -166,11 +143,9 @@ public class MotorPh {
             System.out.println("Philhealth: " + philHealth);
             System.out.println("Pag-ibig: " + pagIbig);
             System.out.println("---------------------------------------------");
-
-            // Call method to calculate net salary for the employee
-            employeeNetSalary(employeeID);
-            inputEmployeeID.close();
         }
+        goBackToMainMenu();
+        inputEmployeeID.close();
 
     }
 
@@ -211,6 +186,10 @@ public class MotorPh {
         }
 
         Scanner inputPayrollMonth = new Scanner(System.in);
+        System.out.println("***********************************************");
+        System.out.println("        You have chosen option #2    ");
+        System.out.println("          Calculate Net Salary  Based on Hours Worked      ");
+        System.out.println("***********************************************");
 
         System.out.print("Enter Payroll Month(1-12):");
         selectedPayrollMonth = inputPayrollMonth.nextLine();
@@ -279,7 +258,31 @@ public class MotorPh {
         System.out.println("Time in: " + listTimeIn);
         System.out.println("Time out: " + listTimeOut);
 
+        goBackToMainMenu();
         inputPayrollMonth.close();
+    }
+
+    private static void calculateNetSalary() {
+        // Getting the list of employees
+        Employee[] employeeList = employeeModel.getEmployeeDataList();
+        SalaryDeductions salaryDeductions = new SalaryDeductions();
+        System.out.println("***********************************************");
+        System.out.println("        You have chosen option #3    ");
+        System.out.println("          Employee Net Salaries      ");
+        System.out.println("***********************************************");
+        // Iterate through the list of employees to find the specified employee
+        for (int i = 0; i < employeeList.length; i++) {
+            Employee employee = employeeList[i];
+            if (Objects.equals(employee.getEmpID(), selectedEmployeeId)) {
+                System.out.print("Last Name: " + employee.getLastName()
+                        + ", First Name: " + employee.getFirstName()
+                        + ", Basic Salary: " + employee.getBasicSalary()
+                        + ", Net Salary: "
+                        + (employee.getBasicSalary() - salaryDeductions.getTotalDeductions(employee.getBasicSalary()))
+                        + "\n");
+            }
+        }
+        goBackToMainMenu();
     }
 
     /**
