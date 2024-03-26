@@ -1,15 +1,16 @@
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 
 package Java;
+
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 import java.text.DecimalFormat;
+
 /**
  *
  * @author EM
@@ -19,7 +20,6 @@ public class MotorPh {
     private static EmployeeModel employeeModel;
     private static AttendanceModel attendanceModel;
     private static String selectedEmployeeId = "1";
-
 
     public static void main(String[] args) {
         // Initialize employee and attendance models
@@ -85,7 +85,6 @@ public class MotorPh {
         inputToMainMenu.close();
     }
 
-
     /**
      * The chooseEmployee method allows the user to input an employee ID and
      * retrieves
@@ -106,7 +105,7 @@ public class MotorPh {
         System.out.println("        You have chosen option #1    ");
         System.out.println("          View Employee Records      ");
         System.out.println("***********************************************");
-        //instantiation
+        // instantiation
         Scanner inputEmployeeID = new Scanner(System.in);
 
         System.out.print("Enter Employee ID: ");
